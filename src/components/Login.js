@@ -1,13 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Login = () => {
+class Login extends Component {
+    constructor(){
+        super()
+        this.state = {
+            username: null
+        }
+    }
 
-    return(
-        <div className="post card">
-            <h4 className="center">Login</h4>
-            <p>lorenipsum</p>
-        </div>
-    )
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.login(this.state.username)
+        this.props.hideForm()
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            username: e.target.value
+        })
+    }
+
+
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.handleSubmie}>
+                    <input name={'username'} onChange={this.handleChange}/>
+                    <input type='subnmit' value='login' />
+                </form>
+            </div>
+        )
+    }
 }
 
-export default Login;
+export default Login

@@ -64,7 +64,7 @@ class NotesContainer extends Component {
         const { notes } = this.state
         return(
             <div>
-                <NoteList notes={notes} deleteNote={this.deleteNote} />
+
             </div>
         )
     }
