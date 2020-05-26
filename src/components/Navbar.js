@@ -1,6 +1,16 @@
 import React from 'react'
 
-const Navbar = (props) => {
+class Navbar extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            currentUser: this.props.currentUser,
+            showLogin: false,
+            showSignup: false
+        }
+    }
+
+    render() {
     return(
         <nav className="nav-wrapper red bg-darken-3">
             <div className="container">
@@ -8,11 +18,13 @@ const Navbar = (props) => {
                 <ul className="right">
                     <li><a href="/">Home</a></li>
                     <li><a href="/new note">New Note</a></li>
-                    <li><a href="/login">login</a></li> 
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Signup</a></li> 
                 </ul>
             </div>
         </nav>
-    )
+        )
+    }
 }
 
-export default Navbar
+export default Navbar;
