@@ -41,12 +41,20 @@ class Signup extends Component {
         } else {
             alert("Passwords don't match!")
         }
+        this.setState({
+            username: '',
+            password: '',
+            passwordConfirmation: '',
+        })  
     }
 
 
     render() {
+        // console.log(this.props);
+        
         return (
             <div className="center-form">
+                <h3>Sign Up</h3>
                 <form className="signup-form"
                     onSubmit={this.handleSubmit}>
                     <input

@@ -5,22 +5,20 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
-const API = 'http://localhost:3000/'
+// const API = 'http://localhost:3000/'
+
 class App extends Component {
-  constructor(){
-    super()
-    this.state = {
+    state = {
       currentUser: null
     }
-  }
 
-  setUser = user => {
+
+  setUser = user => {    
     this.setState({
       currentUser: user
-    }, () => {this.props.history.push("/home")})
+    }, () => {
+    this.props.history.push("/")})
   }
-
-
 
   handleChange = e => {
     this.setState({
@@ -29,6 +27,8 @@ class App extends Component {
   }
 
   render(){
+    console.log("user", this.state.currentUser);
+    
   return (
     <BrowserRouter>
       <div className="note-app container">
@@ -37,7 +37,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/login' render={ (props) => <Login {...props} handleUserLogin={this.handleUserLogin} /> } /> 
-          <Route path='/signup' render={ (props) => <Signup {... props} setUser={this.setUser} />} />
+          <Route path='/signup' render={() => <Signup setUser={this.setUser}/>} />
           </Switch>
       </div>
     </BrowserRouter>
