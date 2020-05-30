@@ -14,6 +14,26 @@ class Login extends Component {
             [e.target.name]: e.target.value
         });
     }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        
+        fetch('http://localhost:3000/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state)
+        })
+        .then(resp => resp.json())
+        .then(user => {
+            if (user.errors){
+                alert(user.errors)
+            } else {
+                this.props.setUser(user)
+            }
+        }) 
+    }
     
     render() {
         return (

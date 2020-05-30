@@ -4,8 +4,7 @@ const NewNote = () => {
 
     return(
         <div className="post card">
-            <h4 className="center"></h4>
-            <p>lorenipsum</p>
+            <h4>Create a New Note</h4>    
         </div>
     )
 }

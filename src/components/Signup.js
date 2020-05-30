@@ -45,7 +45,7 @@ class Signup extends Component {
             username: '',
             password: '',
             passwordConfirmation: '',
-        })  
+        })
     }
 
 
@@ -93,3 +93,33 @@ class Signup extends Component {
 }
 
 export default Signup
+
+
+// if (this.state.password === this.state.passwordConfirmation) {
+//     fetch("http://localhost:3000/signup",{
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             username: this.state.username,
+//             password: this.state.password
+//         })
+//     })
+//     .then( resp => resp.json())
+//     .then( response => {
+//         if(response.errors){
+//             alert(response.errors)
+//         } else {
+//             this.props.setUser(response)
+//         }
+//     })
+// } else {
+//     alert("Passwords don't match!")
+// }
+// this.setState({
+//     username: '',
+//     password: '',
+//     passwordConfirmation: '',
+// })
+// this.props.history.push('/home')
