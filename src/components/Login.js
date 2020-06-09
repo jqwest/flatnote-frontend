@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Login extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            username: '',
-            password: ''
-        }
+class Login extends React.Component {
+
+    state = {
+        username: "",
+        password: ""
     }
 
     handleChange = e => {
@@ -24,12 +22,12 @@ class Login extends Component {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(this.state)
-        })
-        .then(resp => resp.json())
-        .then(user => {
-            if (user.errors){
-                alert(user.errors)
-            } else {
+            })
+            .then(resp => resp.json())
+            .then(user => {
+                if (user.errors){
+                  alert(user.errors)
+                } else {
                 this.props.setUser(user)
             }
         }) 
@@ -65,3 +63,4 @@ class Login extends Component {
 }
 
 export default Login
+

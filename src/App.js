@@ -6,19 +6,50 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import NewNote from './components/NewNote';
 
-// const API = 'http://localhost:3000/'
-
 class App extends Component {
     state = {
       currentUser: null
     }
 
+  componentDidMount(){
+    const token = localStorage.token
 
-  setUser = user => {    
+    if(token){
+      //get user info
+      fetch("http://localhost:3000/auto_login", {
+        headers: {
+          "Authorization": token
+        }
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.errors){
+          alert(response.errors)
+        } else {
+          this.setState({
+            currentUser: response
+          })
+        }
+      })
+    }
+  }
+
+  setUser = (response) => {
     this.setState({
-      currentUser: user
+      currentUser: response.user
     }, () => {
-    this.props.history.push('/')})
+      localStorage.token = response.token
+      this.props.history.push("/")
+    })
+  }
+
+  logout = () => {
+    this.setState({
+      currentUser: null
+    }, () => {
+      localStorage.removeItem("token")
+      this.props.history.push("/login")
+    })
   }
 
   handleChange = e => {
@@ -26,14 +57,14 @@ class App extends Component {
       searchTerm: e.target.value.toUpperCase()
     })
   }
-
+  
   render(){
     console.log("user", this.state.currentUser);
     console.log(this.props);
     
   return (
       <div className="note-app container">
-      <Navbar handleChange={this.handleChange} />
+      <Navbar currentUser={this.state.currentUser} logout={this.logout} handleChange={this.handleChange} />
         <h1 className="center red-text">Notes</h1>
         <Switch>
           <Route exact path='/' component={Home} />
