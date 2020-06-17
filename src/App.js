@@ -5,6 +5,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NewNote from './components/NewNote';
+import MainContainer from './components/MainContainer';
+
 
 class App extends Component {
     state = {
@@ -66,6 +68,7 @@ class App extends Component {
       <div className="note-app container">
       <Navbar currentUser={this.state.currentUser} logout={this.logout} handleChange={this.handleChange} />
         <h1 className="center red-text">Notes</h1>
+        <MainContainer />
         <Switch>
           <Route exact path='/' component={Home} />
           
