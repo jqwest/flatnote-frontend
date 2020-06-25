@@ -28,7 +28,7 @@ class Login extends React.Component {
                 if (user.errors){
                   alert(user.errors)
                 } else {
-                this.props.setUser(user)
+                this.props.login(user)
             }
         }) 
     }

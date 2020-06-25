@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export class UserControls extends Component {
-    render() {
-        return (
-            <div className="user-controls">
-                <button className="login">LOG IN</button>
-                <button className="signup">SIGN UP</button>
-          </div>
-        )
-    }
+const UserControls = props => {
+
+    return (
+        <div className="user-controls">
+            <Link to="/login"><button className="login">LOG IN</button></Link>
+            <Link to="/signup"><button className="signup">SIGN UP</button></Link>
+            <button onClick={props.logout}><span role="img" aria-label="user-controls">{props.currentUser ? props.currentUser.username : "👤"}</span></button>
+        </div>
+    )
 }
 
 export default UserControls

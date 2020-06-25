@@ -1,12 +1,16 @@
 import React from 'react'
 
-const NewNote = () => {
+class NewNote extends React.Component {
 
-    return(
-        <div className="post card">
-            <h4>Create a New Note</h4>    
-        </div>
-    )
+    render(){
+        return(
+            <div className="post card">
+                <form>
+                    <label>Title</label>
+                </form> 
+            </div>
+        )
+    }
 }
 
 export default NewNote;

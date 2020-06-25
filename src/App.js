@@ -9,9 +9,14 @@ import MainContainer from './components/MainContainer';
 
 
 class App extends Component {
-    state = {
-      currentUser: null
+  constructor(props){
+    super(props)
+      this.state = {
+        currentUser: null,
+        isLoggedIn: false
     }
+  }
+    
 
   componentDidMount(){
     const token = localStorage.token
@@ -36,9 +41,10 @@ class App extends Component {
     }
   }
 
-  setUser = (response) => {
+  login = (response) => {
     this.setState({
-      currentUser: response.user
+      currentUser: response.user,
+      isLoggedIn: true
     }, () => {
       localStorage.token = response.token
       this.props.history.push("/")
@@ -47,7 +53,8 @@ class App extends Component {
 
   logout = () => {
     this.setState({
-      currentUser: null
+      currentUser: null,
+      isLoggedIn: false
     }, () => {
       localStorage.removeItem("token")
       this.props.history.push("/login")
@@ -60,25 +67,31 @@ class App extends Component {
     })
   }
   
+
+
   render(){
-    console.log("user", this.state.currentUser);
-    console.log(this.props);
+    // console.log("user", this.state.currentUser);
+    // console.log(this.props);
     
   return (
       <div className="note-app container">
-      <Navbar currentUser={this.state.currentUser} logout={this.logout} handleChange={this.handleChange} />
+      <Navbar
+        isLoggedIn={this.state.isLoggedIn} 
+        currentUser={this.state.currentUser} 
+        logout={this.logout} 
+        handleChange={this.handleChange} />
         <h1 className="center red-text">Notes</h1>
         <MainContainer />
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route path='/home' render={() => <Home message={this.message} /> } />
           
-          <Route path='/login' render={() => <Login setUser={this.setUser} /> } />
+          <Route path='/login' render={() => <Login login={this.login} /> } />
           
-          <Route path='/signup' render={() => <Signup setUser={this.setUser}/>} />
+          <Route path='/signup' render={() => <Signup login={this.login}/>} />
 
           <Route path='/newnote' component={NewNote} />
           
-          </Switch>
+        </Switch>
       </div>
   );}
 }

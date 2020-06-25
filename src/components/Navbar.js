@@ -1,22 +1,30 @@
 import React from 'react';
-// import UserControls from './UserControls';
+import UserControls from './UserControls';
+import HomeButton from './HomeButton';
+// import SearchBar from './SearchBar';
+
 
 const Navbar = props => {
+    console.log(props);
 
     return(
-        <nav className="nav-wrapper red bg-darken-3">
-            <div className="container">
-            {/* <UserControls /> */}
-                <a href="/" className="brand-logo-right">Flat Note</a>
-                <ul className="right">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/new note">New Note</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/signup">Sign Up</a></li> 
-                </ul>
+        
+        <div className="navbar">
+            <div className="top">
+                <HomeButton />
+                Welcome { 
+                    props.isLoggedIn ? props.currentUser.username : 'Please login or Create an Account'
+                }
+                {/* <SearchBar handleChange={props.handleChange} searchTerm={props.searchTerm}/> */}
+                <UserControls logout={props.logout} currentUser={props.currentUser} />
             </div>
-        </nav>
+            <div className="bottom">
+                {/* <FilterBar cardMode={props.cardMode} listMode={props.listMode}/> */}
+            </div>
+      </div>
+
     )
+     
 }
 
 export default Navbar;
