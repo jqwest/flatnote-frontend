@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import MainNavbar from './components/MainNavbar';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NewNote from './components/NewNote';
-import MainContainer from './components/MainContainer';
-
+import NotesContainer from './components/NotesContainer';
+import './App.css'
 
 class App extends Component {
   constructor(props){
@@ -75,13 +75,13 @@ class App extends Component {
     
   return (
       <div className="note-app container">
-      <Navbar
+      <MainNavbar
         isLoggedIn={this.state.isLoggedIn} 
         currentUser={this.state.currentUser} 
         logout={this.logout} 
         handleChange={this.handleChange} />
         <h1 className="center red-text">Notes</h1>
-        <MainContainer />
+        <NotesContainer />
         <Switch>
           <Route path='/home' render={() => <Home message={this.message} /> } />
           
