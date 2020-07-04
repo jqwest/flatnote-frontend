@@ -1,5 +1,7 @@
 import React from 'react'
 
+const API = 'http://localhost:3000/notes'
+
 class NewNote extends React.Component {
     constructor(){
         super()
@@ -10,7 +12,6 @@ class NewNote extends React.Component {
         }
     }
 
-
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
@@ -19,15 +20,19 @@ class NewNote extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const addNewNote = {
-            title: this.state.title,
-            content: this.state.content,
-            tags: this.state.tags
-        }
-        console.log(e);
+        const reqObj = {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application.json',
+                'Accept': 'application/json'},
+            body: JSON.stringify({
+                ...this.state})
+        };
 
+        fetch(API, reqObj)
+            .then(resp => resp.json())
+            .then(data => console.log(data));
     }
-
 
     render(){
         return(
@@ -51,6 +56,15 @@ class NewNote extends React.Component {
                         placeholder='description'
                         onChange={this.handleChange}>
                     </textarea>
+                    </div>
+                    <div className='input-field'>
+                        <input
+                            placeholder='tags' 
+                            value={this.state.tags} 
+                            type='text' 
+                            name='tags' 
+                            onChange={this.handleChange}>
+                        </input>
                     </div>
                     <button>Create</button>
                 </form>
