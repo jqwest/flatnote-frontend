@@ -1,20 +1,21 @@
 import React from 'react';
 
 class NotesContainer extends React.Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
-            notes: [],
+            notes: null,
         }
+        console.log(props)
     }
 
-    componentDidMount(id) {
-        fetch(`http://localhost:3000/users/${id}`)
-        .then(resp => resp.json())
-        .then(data => console.log(data))
-    }
+
+
+
 
     render(){
+        console.log(this.props.currentUser);
+        
         return (
             <div>
 

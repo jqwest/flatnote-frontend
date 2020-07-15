@@ -1,7 +1,5 @@
 import React from 'react'
 
-const API = 'http://localhost:3000/notes'
-
 class NewNote extends React.Component {
     constructor(){
         super()
@@ -29,7 +27,7 @@ class NewNote extends React.Component {
                 ...this.state})
         };
 
-        fetch(API, reqObj)
+        fetch(`http://localhost:3000/`, reqObj)
             .then(resp => resp.json())
             .then(data => console.log(data));
     }

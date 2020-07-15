@@ -41,6 +41,8 @@ class App extends Component {
     }
   }
 
+
+
   login = (response) => {
     this.setState({
       currentUser: response.user,
@@ -81,7 +83,7 @@ class App extends Component {
         logout={this.logout} 
         handleChange={this.handleChange} />
         <h1 className="center red-text">Notes</h1>
-        <NotesContainer />
+        <NotesContainer currentUser={this.state.currentUser} />
         <Switch>
           <Route path='/home' render={() => <Home message={this.message} /> } />
           

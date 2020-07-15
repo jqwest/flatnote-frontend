@@ -24,8 +24,8 @@ const MainNavbar = props => {
           }
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            {props.isLoggedIn ? <Link to="#pricing">Log Out</Link> : null
-}
+            {props.isLoggedIn ? <Link to="/home">Log Out</Link> : null
+            }
       </Nav>
       {/* <Form inline>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
