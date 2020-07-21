@@ -66,25 +66,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
-
-extra code that needs to be cleaned up
-
-/ handleUserLogin = () => {
-  //   fetch('http://localhost:3000/login', {
-  //     method: "POST",
-  //     headers: {
-  //         "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(this.state)
-  //     })
-  //     .then(resp => resp.json())
-  //     .then(user => {
-  //       if (user.errors){
-  //         alert(user.errors)
-  //       } else {
-  //         this.props.setUser(user)
-  //     }
-  //   }) 
-  // }
