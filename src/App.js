@@ -13,7 +13,9 @@ class App extends Component {
     super(props)
       this.state = {
         currentUser: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        username: "",
+        password: "" 
     }
   }
     
@@ -59,7 +61,7 @@ class App extends Component {
       isLoggedIn: false
     }, () => {
       localStorage.removeItem("token")
-      this.props.history.push("/login")
+      this.props.history.push("/")
     })
   }
 

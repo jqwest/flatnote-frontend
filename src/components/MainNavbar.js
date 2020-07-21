@@ -1,22 +1,19 @@
 import React from 'react';
-import UserControls from './UserControls';
-import HomeButton from './HomeButton';
 import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom';
 
 const MainNavbar = props => {
-    console.log(props);
+  console.log(props);
+
+  const isLoggedIn = props.isLoggedIn;
 
     return (
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="light">
         <Link to="/home">Flatnote</Link>
         Welcome { 
-          props.isLoggedIn ? props.currentUser.username : 'Please login or Create an Account to Continue'
-      }
+          isLoggedIn ? props.currentUser.username : 'Please login or Create an Account to Continue'
+          }
           <Nav className="mr-auto">
           {
             props.isLoggedIn ? <Link to="/newnote">New Note</Link> : null
@@ -27,10 +24,7 @@ const MainNavbar = props => {
             {props.isLoggedIn ? <Link to="/home">Log Out</Link> : null
             }
       </Nav>
-      {/* <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-info">Search</Button>
-      </Form> */}
+
   </Navbar>
     )
 }
