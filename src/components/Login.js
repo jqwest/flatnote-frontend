@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component} from 'react'
 
-class Login extends React.Component {
+class Login extends Component {
+
 
     state = {
         username: "",
@@ -19,16 +20,17 @@ class Login extends React.Component {
         fetch('http://localhost:3000/login', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(this.state)
             })
             .then(resp => resp.json())
-            .then(user => {
-                if (user.errors){
-                  alert(user.errors)
+            .then(response => {
+                if (response.errors){
+                  alert(response.errors)
                 } else {
-                this.props.login(user)
+                this.props.login(response)
             }
         }) 
     }

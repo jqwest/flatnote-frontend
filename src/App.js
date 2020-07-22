@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import MainNavbar from './components/MainNavbar';
+import Navigation from './layout/Navigation';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NewNote from './components/NewNote';
-import NotesContainer from './components/NotesContainer';
+
 import './App.css'
 
 class App extends Component {
   constructor(props){
-    super(props)
-      this.state = {
-        currentUser: null,
-        isLoggedIn: false,
-        username: "",
-        password: "" 
+    super(props);
+    this.state = {
+      currentUser: null,
+      isLoggedIn: false,
     }
+
   }
+    
     
 
   componentDidMount(){
@@ -25,7 +25,7 @@ class App extends Component {
 
     if(token){
       //get user info
-      fetch("http://localhost:3000/auto_login", {
+      fetch("http://localhost:3000/login", {
         headers: {
           "Authorization": token
         }
@@ -43,9 +43,14 @@ class App extends Component {
     }
   }
 
-
+  setUser = response => {
+    this.setState({
+      currentUser: response
+    })
+  }
 
   login = (response) => {
+    // const { currentUser, isLoggedIn } = this.state;
     this.setState({
       currentUser: response.user,
       isLoggedIn: true
@@ -74,18 +79,18 @@ class App extends Component {
 
 
   render(){
-    // console.log("user", this.state.currentUser);
+    console.log("user", this.state.currentUser);
     // console.log(this.props);
+
     
   return (
       <div className="note-app container">
-      <MainNavbar
+      <Navigation
         isLoggedIn={this.state.isLoggedIn} 
         currentUser={this.state.currentUser} 
         logout={this.logout} 
         handleChange={this.handleChange} />
-        <h1 className="center red-text">Notes</h1>
-        <NotesContainer currentUser={this.state.currentUser} />
+        {/* <NotesContainer currentUser={this.state.currentUser} /> */}
         <Switch>
           <Route path='/home' render={() => <Home message={this.message} /> } />
           
