@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NewNote from './components/NewNote';
-
 import './App.css'
 
 class App extends Component {
@@ -17,10 +16,12 @@ class App extends Component {
     }
 
   }
-    
-    
 
   componentDidMount(){
+    this.fetchToken();
+  }
+
+  fetchToken = () => {
     const token = localStorage.token
 
     if(token){
@@ -36,7 +37,8 @@ class App extends Component {
           alert(response.errors)
         } else {
           this.setState({
-            currentUser: response
+            currentUser: response,
+            isloggedIn: true,
           })
         }
       })
@@ -45,20 +47,13 @@ class App extends Component {
 
   setUser = response => {
     this.setState({
-      currentUser: response
+      currentUser: response.user
+    }, () => {
+      localStorage.token = response.token
+      this.props.history.push("/home")
     })
   }
 
-  login = (response) => {
-    // const { currentUser, isLoggedIn } = this.state;
-    this.setState({
-      currentUser: response.user,
-      isLoggedIn: true
-    }, () => {
-      localStorage.token = response.token
-      this.props.history.push("/")
-    })
-  }
 
   logout = () => {
     this.setState({
@@ -66,7 +61,7 @@ class App extends Component {
       isLoggedIn: false
     }, () => {
       localStorage.removeItem("token")
-      this.props.history.push("/")
+      this.props.history.push("/login")
     })
   }
 
@@ -76,27 +71,21 @@ class App extends Component {
     })
   }
   
-
-
   render(){
     console.log("user", this.state.currentUser);
-    // console.log(this.props);
 
+    const { isLoggedIn, currentUser } = this.state;
+    const { logout, login, setUser  } = this.props;
     
   return (
       <div className="note-app container">
-      <Navigation
-        isLoggedIn={this.state.isLoggedIn} 
-        currentUser={this.state.currentUser} 
-        logout={this.logout} 
-        handleChange={this.handleChange} />
-        {/* <NotesContainer currentUser={this.state.currentUser} /> */}
+      <Navigation isLoggedIn={isLoggedIn} currentUser={currentUser} logout={logout} />
         <Switch>
-          <Route path='/home' render={() => <Home message={this.message} /> } />
+          <Route path='/home' render={() => <Home /> } />
           
-          <Route path='/login' render={() => <Login login={this.login} /> } />
+          <Route path='/login' render={(props) => <Login {...props} setUser={setUser} /> } />
           
-          <Route path='/signup' render={() => <Signup login={this.login}/>} />
+          <Route path='/signup' render={() => <Signup login={login}/>} />
 
           <Route path='/newnote' component={NewNote} />
           

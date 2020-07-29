@@ -1,8 +1,6 @@
 import React, { Component} from 'react'
 
 class Login extends Component {
-
-
     state = {
         username: "",
         password: ""
@@ -30,7 +28,7 @@ class Login extends Component {
                 if (response.errors){
                   alert(response.errors)
                 } else {
-                this.props.login(response)
+                this.props.setUser(response)
             }
         }) 
     }
