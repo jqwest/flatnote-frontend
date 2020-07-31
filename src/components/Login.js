@@ -1,10 +1,14 @@
 import React, { Component} from 'react'
 
 class Login extends Component {
-    state = {
-        username: "",
-        password: ""
+    constructor(){
+        super()
+        this.state = {
+            username: "",
+            password: ""
+        }
     }
+ 
 
     handleChange = e => {
         this.setState({
@@ -12,28 +16,31 @@ class Login extends Component {
         });
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-        
-        fetch('http://localhost:3000/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(this.state)
-            })
-            .then(resp => resp.json())
-            .then(response => {
-                if (response.errors){
-                  alert(response.errors)
-                } else {
-                this.props.setUser(response)
-            }
-        }) 
-    }
+    handleSubmit = (e) => {
+        e.preventDefault()
+    
+        fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(this.state)
+        })
+        .then(res => res.json())
+        .then(response => {
+          //set user to state
+          //redirect!
+          if (response.errors){
+            alert(response.errors)
+          } else {
+            this.props.setUser(response)
+          }
+        })
+      }
     
     render() {
+        console.log(this.props);
         return (
             <form onSubmit={this.handleSubmit}>
                 <h3>Sign In</h3>

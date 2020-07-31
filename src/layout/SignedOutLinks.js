@@ -2,12 +2,7 @@ import React from 'react'
 
 import Button from 'react-bootstrap/Button';
 
-const SignedOutLinks = (props) => {
-    console.log(props);
-
-    const handleClick = () => {
-        props.SignedOutLinks();
-    }
+const SignedOutLinks = () => {
 
     return (
         <div>

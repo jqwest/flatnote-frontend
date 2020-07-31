@@ -8,14 +8,11 @@ import NewNote from './components/NewNote';
 import './App.css'
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
+
+    state = {
       currentUser: null,
       isLoggedIn: false,
     }
-
-  }
 
   componentDidMount(){
     this.fetchToken();
@@ -47,7 +44,8 @@ class App extends Component {
 
   setUser = response => {
     this.setState({
-      currentUser: response.user
+      currentUser: response.user,
+      isloggedIn: true
     }, () => {
       localStorage.token = response.token
       this.props.history.push("/home")
@@ -65,11 +63,11 @@ class App extends Component {
     })
   }
 
-  handleChange = e => {
-    this.setState({
-      searchTerm: e.target.value.toUpperCase()
-    })
-  }
+  // handleChange = e => {
+  //   this.setState({
+  //     searchTerm: e.target.value.toUpperCase()
+  //   })
+  // }
   
   render(){
     console.log("user", this.state.currentUser);
@@ -79,17 +77,19 @@ class App extends Component {
     
   return (
       <div className="note-app container">
-      <Navigation isLoggedIn={isLoggedIn} currentUser={currentUser} logout={logout} />
-        <Switch>
-          <Route path='/home' render={() => <Home /> } />
+        <Navigation isLoggedIn={isLoggedIn} currentUser={currentUser} logout={logout} />
+        <div id="content" className="ui container">
+          <Switch>
+            <Route path='/home' render={() => <Home /> } />
           
-          <Route path='/login' render={(props) => <Login {...props} setUser={setUser} /> } />
+            <Route path='/login' render={() => <Login setUser={setUser} /> } />
           
-          <Route path='/signup' render={() => <Signup login={login}/>} />
+            <Route path='/signup' render={() => <Signup login={login}/>} />
 
-          <Route path='/newnote' component={NewNote} />
+            <Route path='/newnote' component={NewNote} />
           
-        </Switch>
+          </Switch>
+        </div>
       </div>
   );}
 }
