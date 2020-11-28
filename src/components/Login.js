@@ -40,11 +40,10 @@ class Login extends Component {
       }
     
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <form onSubmit={this.handleSubmit}>
                 <h3>Sign In</h3>
-
                 <div className='form-group'>
                     <label>Username</label>
                     <input
