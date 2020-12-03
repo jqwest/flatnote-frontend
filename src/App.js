@@ -17,7 +17,8 @@ handleLogin = userLogin => {
   const reqObj = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+
     },
     body: JSON.stringify(userLogin)
   }
@@ -33,6 +34,7 @@ handleLogin = userLogin => {
 }
 
 handleLogout = () => {
+  localStorage.removeItem('token')
   this.setState({
     currentUser: null
   })

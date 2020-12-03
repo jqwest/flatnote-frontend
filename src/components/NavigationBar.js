@@ -18,8 +18,9 @@ export const NavigationBar = (props) => {
                 {localStorage.token ?
                     (
                         <Nav className="ml-auto">
-                            <Nav.Item><Nav.Link href="/dashboard" >Dashboard</Nav.Link></Nav.Item>
-                            <Nav.Item><Button className="logout-btn" variant="link" onClick={(e) => props.handleLogOut()}>Log Out</Button></Nav.Item>
+                            <Nav.Item><Nav.Link as={Link}
+                            to="/dashboard" >Dashboard</Nav.Link></Nav.Item>
+                            <Nav.Item><Button className="logout-btn" variant="link" onClick={(e) => props.handleLogout()}>Log Out</Button></Nav.Item>
                         </Nav>
                         )
                         :

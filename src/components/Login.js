@@ -28,7 +28,8 @@ export default class Login extends Component {
             username: '',
             password: '',
         })
-        this.props.history.push('/home')
+        localStorage.setItem('token', JSON.stringify(this.state))
+        this.props.history.push('/dashboard')
     }
 
     render() {
