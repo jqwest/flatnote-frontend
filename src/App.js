@@ -15,6 +15,7 @@ export default class App extends Component {
   }
 
 handleLogin = userLogin => {
+  
   const reqObj = {
     method: 'POST',
     headers: {
@@ -56,7 +57,7 @@ updateUser = data => {
           <Switch>
             <Route path='/login' render={(props) => <Login {...props} handleLogin={this.handleLogin} />}/>
             <Route path='/home' render={(props) => <Home {...props} updateUser={this.updateUser} currentUser={this.state.currentUser} />}/>
-            <Route path='/signup' render={(props) => <SignUp {...props} />}/>
+            <Route path='/signup' render={(props) => <SignUp {...props} updateUser={this.updateUser} currentUser={this.state.currentUser} />}/>
           </Switch>
         </div>
       </Router>

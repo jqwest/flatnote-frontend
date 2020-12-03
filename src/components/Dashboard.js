@@ -26,9 +26,10 @@ export default class Dashboard extends Component {
                 this.props.updateUser(data)
             })
             .catch(err => console.log(err))
-            console.log(token)
+
         }
     }
+
     render() {
         return (
             <div>
