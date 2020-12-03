@@ -4,6 +4,7 @@ import './App.css'
 import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
 import Home from './components/Home';
+import SignUp from './components/SignUp';
 
 export default class App extends Component {
   constructor(){
@@ -55,6 +56,7 @@ updateUser = data => {
           <Switch>
             <Route path='/login' render={(props) => <Login {...props} handleLogin={this.handleLogin} />}/>
             <Route path='/home' render={(props) => <Home {...props} updateUser={this.updateUser} currentUser={this.state.currentUser} />}/>
+            <Route path='/signup' render={(props) => <SignUp {...props} />}/>
           </Switch>
         </div>
       </Router>
