@@ -5,6 +5,8 @@ import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
+import Footer from './components/Footer';
+import { Container } from 'react-bootstrap';
 
 export default class App extends Component {
   constructor(){
@@ -25,7 +27,7 @@ handleLogin = userLogin => {
     body: JSON.stringify(userLogin)
   }
 
-  fetch('http://localhost:3000/login', reqObj)
+  fetch('https://still-sands-32046.herokuapp.com/login', reqObj)
   .then(resp => resp.json())
   .then( user => 
     this.setState({
@@ -51,8 +53,9 @@ updateUser = data => {
 
   render() {
     return (
+      <Container fluid>
       <Router>
-        <div>
+        <div id='content-wrap'>
           <Route render={(props) => <NavigationBar {...props} currentUser={this.state.currentUser} updateUser={this.updateUser} handleLogin={this.handleLogin} handleLogout={this.handleLogout} />}/>
           <Switch>
             <Route path='/login' render={(props) => <Login {...props} handleLogin={this.handleLogin} />}/>
@@ -61,7 +64,8 @@ updateUser = data => {
           </Switch>
         </div>
       </Router>
-      
+      <Footer id='footer'/>
+      </Container>
     )
   }
 }

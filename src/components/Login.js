@@ -21,22 +21,49 @@ export default class Login extends Component {
     }
 
     handleSubmit = e => {
-        e.preventDefault();
+        e.preventDefault()
 
-        this.props.handleLogin(this.state)
-        this.setState({
-            username: '',
-            password: '',
+        const reqObj = {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json',
+	            'Accept': 'application/json'
+	        },
+	        body: JSON.stringify(this.state)
+        }
+        
+        fetch('http://localhost:3000/sessions', reqObj)
+		.then( resp => resp.json())
+		.then( user => {
+			if (!user.error) {
+				this.props.history.push('/dashboard')
+			} else {
+				alert(user.error)
+            }
+            localStorage.setItem('token', JSON.stringify(this.state))
+        // this.props.history.push('/dashboard')
         })
-        localStorage.setItem('token', JSON.stringify(this.state))
-        this.props.history.push('/dashboard')
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     render() {
         console.log(this.props);
         const { username, password } = this.state
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form bg="light" expand="lg" onSubmit={this.handleSubmit}>
                 <br></br>
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
@@ -65,6 +92,7 @@ export default class Login extends Component {
                 </Form.Group>
              
                 <Button 
+                    bg="light" expand="lg"
                     variant="primary" 
                     type="submit"
                 >

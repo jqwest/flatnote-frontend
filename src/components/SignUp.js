@@ -51,7 +51,7 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form bg="light" expand="lg" onSubmit={this.handleSubmit}>
                 <Form.Group controlId='username'>
                     <Form.Label>Username</Form.Label>
                         <Col xs={7}>
@@ -77,7 +77,12 @@ export default class SignUp extends Component {
                             />
                         </Col>
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button 
+                        bg="light" 
+                        expand="lg"
+                        variant="primary" 
+                        type="submit"
+                    >
                     Create Account
                     </Button>
             </Form>
