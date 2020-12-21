@@ -16,26 +16,6 @@ export default class App extends Component {
     }
   }
 
-handleLogin = userLogin => {
-  
-  const reqObj = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-
-    },
-    body: JSON.stringify(userLogin)
-  }
-
-  fetch('https://still-sands-32046.herokuapp.com/login', reqObj)
-  .then(resp => resp.json())
-  .then( user => 
-    this.setState({
-      ...this.state,
-      currentUser: user
-    }))
-    .catch(err => console.log(err))
-}
 
 handleLogout = () => {
   localStorage.removeItem('token')

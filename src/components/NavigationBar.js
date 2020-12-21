@@ -26,9 +26,9 @@ export const NavigationBar = (props) => {
                         :
                         (
                         <Nav className="ml-auto">
-                            Welcome to Flatnote Please Login to Continue
+                            Welcome to Flatnote Please Login or Sign up to to Continue
                             <Nav.Item><Nav.Link as={Link} to="/login">Log In</Nav.Link></Nav.Item>
-                            <Nav.Item><Nav.Link as={Link} to="/signup">Signup</Nav.Link></Nav.Item>
+                            <Nav.Item><Nav.Link as={Link} to="/signup">Sign up</Nav.Link></Nav.Item>
                         </Nav>
             )
           }

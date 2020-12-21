@@ -12,9 +12,9 @@ const Footer = () => {
     }, [])
     return (
         <>
-            <div style={{ float: 'left' }}>&copy; John Leavell - {date}</div> 
-            <div style={{ float: 'left', marginLeft: 'auto'}}>
-            </div>
+            <div id='footer'
+            style={{ float: 'left' }}>&copy; John Leavell -   {date}
+            </div> 
         </>
     )
 }

@@ -32,7 +32,7 @@ export default class Login extends Component {
 	        body: JSON.stringify(this.state)
         }
         
-        fetch('http://localhost:3000/sessions', reqObj)
+        fetch('https://still-sands-32046.herokuapp.com/login', reqObj)
 		.then( resp => resp.json())
 		.then( user => {
 			if (!user.error) {
@@ -41,23 +41,9 @@ export default class Login extends Component {
 				alert(user.error)
             }
             localStorage.setItem('token', JSON.stringify(this.state))
-        // this.props.history.push('/dashboard')
+            this.props.history.push('/dashboard')
         })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     render() {
         console.log(this.props);
@@ -77,8 +63,7 @@ export default class Login extends Component {
                         />
                         </Col>
                 </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
+                <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                     <Col xs={7}>
                     <Form.Control 
@@ -90,7 +75,6 @@ export default class Login extends Component {
                     />
                     </Col>
                 </Form.Group>
-             
                 <Button 
                     bg="light" expand="lg"
                     variant="primary" 
