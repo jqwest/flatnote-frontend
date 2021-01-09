@@ -9,6 +9,7 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            currentUser: this.props.currentUser
         }
     }
 
@@ -32,21 +33,18 @@ export default class Login extends Component {
 	        body: JSON.stringify(this.state)
         }
         
-        fetch('https://still-sands-32046.herokuapp.com/login', reqObj)
+        fetch('http://localhost:3000/login', reqObj)
 		.then( resp => resp.json())
 		.then( user => {
-			if (!user.error) {
-				this.props.history.push('/dashboard')
-			} else {
-				alert(user.error)
-            }
-            localStorage.setItem('token', JSON.stringify(this.state))
+            console.log(user.user)
+		    localStorage.setItem('token', user)
+            this.props.handleLogin(user)
             this.props.history.push('/dashboard')
         })
     }
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         const { username, password } = this.state
         return (
             <Form bg="light" expand="lg" onSubmit={this.handleSubmit}>

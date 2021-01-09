@@ -4,7 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Navbar';
 
+
 export const NavigationBar = (props) => {
+    console.log(props)
     return (
         <div>
             <div>
@@ -21,6 +23,7 @@ export const NavigationBar = (props) => {
                             <Nav.Item><Nav.Link as={Link}
                             to="/dashboard" >Dashboard</Nav.Link></Nav.Item>
                             <Nav.Item><Button className="logout-btn" variant="link" onClick={(e) => props.handleLogout()}>Log Out</Button></Nav.Item>
+                            <Button as={Link} to='/newnote'className='new-note'>Create New Note</Button>
                         </Nav>
                         )
                         :

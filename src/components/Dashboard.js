@@ -6,6 +6,7 @@ export default class Dashboard extends Component {
         this.state = {
             username: '',
             password: '',
+            currentUser: this.props.currentUser
         }
     }
 
@@ -14,23 +15,18 @@ export default class Dashboard extends Component {
         if(!token) {
             this.props.history.push('/login')
         } else {
-            const reqObj = {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-            };
-            fetch('http://localhost:3000/current_user', reqObj)
+            fetch(`http://localhost:3000/user_notes/${this.state.currentUser.user.id}`)
             .then(resp => resp.json())
             .then(data => {
-                this.props.updateUser(data)
+                console.log(data)
+                this.props.handleLogin(data)
             })
             .catch(err => console.log(err))
-
         }
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <h5>Dashboard</h5>
