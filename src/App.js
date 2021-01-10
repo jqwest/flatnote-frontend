@@ -10,26 +10,67 @@ import NewNote from './components/NewNote';
 import Dashboard from './components/Dashboard';
 import { Container } from 'react-bootstrap';
 
+const USERS = "http://localhost:3000/users";
+const NOTES = "http://localhost:3000/notes";
+
 export default class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-      currentUser: null
+      currentUser: null,
+      notes: [],
     }
   }
 
-handleLogout = () => {
-  localStorage.removeItem('token')
+componentDidMount() {
+  fetch(NOTES)
+  .then(resp => resp.json())
+  .then(notes => {
+    console.log(notes)
+    this.setState({
+      ...this.state,
+      notes: notes
+    })
+  })
+  .catch(err => console.log(err))
+}
+
+fetchPosts = () => {
+  fetch(NOTES)
+  .then(resp => resp.json())
+  .then(notes => {
+    this.setState({
+      ...this.state,
+      notes: notes
+    })
+  })
+  .catch(err => console.log(err))
+}
+
+handleChange = e => {
   this.setState({
-    currentUser: null
+    [e.target.name]: e.target.value
   })
 }
 
-handleLogin = (user) => {
+handleLogout = () => {
+
+  localStorage.removeItem('token')
   this.setState({
-    currentUser: user
+    currentUser: null,
+    notes: []
+  })
+  window.location.href = 'http://localhost:3001/home'
+}
+
+updateUser = (data) => {
+  this.setState({
+    ...this.state,
+    currentUser: data['user'],
+    notes: data['notes'],
   })
 }
+
 
   render() {
     const {currentUser} = this.state;
@@ -39,11 +80,11 @@ handleLogin = (user) => {
         <div id='content-wrap'>
           <Route render={(props) => <NavigationBar {...props} currentUser={currentUser} handleLogin={this.handleLogin} handleLogout={this.handleLogout} />}/>
           <Switch>
-            <Route path='/login' render={(props) => <Login {...props} handleLogin={this.handleLogin} currentUser={currentUser} />}/>
+            <Route path='/login' render={(props) => <Login {...props} handleLogin={this.handleLogin} updateUser={this.updateUser} />}/>
             <Route path='/home' render={(props) => <Home {...props}  currentUser={currentUser} />}/>
             <Route path='/signup' render={(props) => <SignUp {...props} currentUser={currentUser} />}/>
             <Route path='/newnote' render={(props) => <NewNote {...props} currentUser={currentUser} />}/>
-            <Route path='/dashboard' render={(props) => <Dashboard {...props} currentUser={currentUser} handleLogin={this.handleLogin} />}/>
+            <Route path='/dashboard' render={(props) => <Dashboard {...props} currentUser={currentUser} updateUser={this.updateUser} handleLogin={this.handleLogin} />}/>
           </Switch>
         </div>
       </Router>
