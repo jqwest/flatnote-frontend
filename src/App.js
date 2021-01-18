@@ -16,59 +16,65 @@ const NOTES = "http://localhost:3000/notes";
 export default class App extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      currentUser: null,
-      notes: [],
+      this.state = {
+        currentUser: null,
+        notes: [],
+        noteTitle: '',
+        noteSection: '',
+        addNote: false,
+        updateNote: false,
     }
   }
 
-componentDidMount() {
-  fetch(NOTES)
-  .then(resp => resp.json())
-  .then(notes => {
-    console.log(notes)
+ 
+
+  componentDidMount() {
+    fetch(NOTES)
+    .then(resp => resp.json())
+    .then(notes => {
+      console.log(notes)
+      this.setState({
+        ...this.state,
+        notes: notes
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
+  fetchPosts = () => {
+    fetch(NOTES)
+    .then(resp => resp.json())
+    .then(notes => {
+      this.setState({
+        ...this.state,
+        notes: notes
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleLogout = () => {
+
+    localStorage.removeItem('token')
+    this.setState({
+      currentUser: null,
+      notes: []
+    })
+    window.location.href = 'http://localhost:3001/home'
+  }
+
+  updateUser = (data) => {
     this.setState({
       ...this.state,
-      notes: notes
+      currentUser: data['user'],
+      notes: data['notes'],
     })
-  })
-  .catch(err => console.log(err))
-}
-
-fetchPosts = () => {
-  fetch(NOTES)
-  .then(resp => resp.json())
-  .then(notes => {
-    this.setState({
-      ...this.state,
-      notes: notes
-    })
-  })
-  .catch(err => console.log(err))
-}
-
-handleChange = e => {
-  this.setState({
-    [e.target.name]: e.target.value
-  })
-}
-
-handleLogout = () => {
-
-  localStorage.removeItem('token')
-  this.setState({
-    currentUser: null,
-    notes: []
-  })
-  window.location.href = 'http://localhost:3001/home'
-}
-
-updateUser = (data) => {
-  this.setState({
-    ...this.state,
-    currentUser: data['user'],
-    notes: data['notes'],
-  })
 }
 
 
