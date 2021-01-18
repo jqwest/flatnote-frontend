@@ -6,6 +6,7 @@ export default class Dashboard extends Component {
     constructor(props){
         super(props)
         this.state = {
+            currentUser: this.props.currentUser
         }
     }
 
@@ -25,6 +26,9 @@ export default class Dashboard extends Component {
            .then(data => {
             //    this.props.updateUser(data)
             console.log(data)
+            this.setState({
+                currentUser: data
+            })
            })
            .catch(err => console.log(err))
        }
